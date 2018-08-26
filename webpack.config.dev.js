@@ -4,6 +4,9 @@ const common = require('./webpack.config.common.js')
 const path = require('path')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
+
+const PORT = 3000
 
 module.exports = merge(common, {
   entry: {
@@ -21,7 +24,7 @@ module.exports = merge(common, {
     hot: true,
     inline: true,
     contentBase: './public',
-    port: 3000,
+    port: PORT,
   },
   module: {
     rules: [
@@ -44,6 +47,7 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
+    new OpenBrowserPlugin({ url: `http://localhost:${PORT}` }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin(),

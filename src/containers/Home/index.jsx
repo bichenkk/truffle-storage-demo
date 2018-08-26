@@ -3,6 +3,7 @@ import { Card, message } from 'antd'
 import { drizzleConnect } from 'drizzle-react'
 import { ContractData } from 'drizzle-react-components'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import Form from './Form'
 import LoadingContainer from '../../components/LoadingContainer'
 import { editForm, setVariable } from '../../actions/home'
@@ -32,14 +33,20 @@ class Home extends React.Component {
   }
 
   render() {
+    const drizzleInitialized = this.props.drizzleStatus.initialized
+    const versionDataKey = drizzleInitialized
+      && this.contracts.SimpleStorage.methods.version.cacheCall()
+    const version = versionDataKey
+      && _.get(this.props.SimpleStorage, `version.${versionDataKey}.value`)
     return (
       <LoadingContainer>
         <div className='home-page'>
-          <Card title='Simple Storage'>
+          <Card title={`Simple Storage ${version || ''}`}>
             <Form
               contractData={<ContractData
                 contract='SimpleStorage'
                 method='get'
+                hideIndicator
               />}
               onSubmit={this.handleFormOnSubmit}
               onFieldsChange={this.props.editForm}
@@ -54,7 +61,7 @@ class Home extends React.Component {
 }
 
 Home.contextTypes = {
-  drizzle: PropTypes.object
+  drizzle: PropTypes.object,
 }
 
 const mapStateToProps = (state) => {
@@ -65,6 +72,7 @@ const mapStateToProps = (state) => {
     editItemTransaction,
     editItemError,
   } = state.home
+  console.log('state.contracts.SimpleStorage', state.contracts.SimpleStorage)
   return {
     formFieldValues,
     isEditItemLoading,

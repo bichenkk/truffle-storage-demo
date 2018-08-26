@@ -6,6 +6,7 @@ contract SimpleStorage is Ownable {
 
   event SetVariable(uint x);
   uint myVariable;
+  string public version = "1.0.0";
 
   function set(uint x) public {
     myVariable = x;

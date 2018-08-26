@@ -29,6 +29,7 @@ module.exports = merge(common, {
       'drizzle',
       'drizzle-react',
       'drizzle-react-components',
+      'lodash',
       'moment',
       'react',
       'react-dom',
