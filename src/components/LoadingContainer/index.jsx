@@ -15,7 +15,8 @@ class LoadingContainer extends Component {
           <h1><span role='img' aria-label='emoji'>⚠️</span></h1>
           <p>
             This browser has no connection to the Ethereum network.
-            Please use the Chrome/FireFox extension MetaMask, or dedicated Ethereum browsers Mist or Parity.
+            Please use the Chrome/FireFox extension MetaMask, or
+             dedicated Ethereum browsers Mist or Parity.
           </p>
         </Card>
       )
@@ -26,8 +27,9 @@ class LoadingContainer extends Component {
         <Card>
           <h1><span role='img' aria-label='emoji'>🦊</span></h1>
           <p>
-            <strong>We can't find any Ethereum accounts!</strong>
-            Please check and make sure Metamask or your browser are pointed at the correct network and your account is unlocked.
+            <strong>We can&apos;t find any Ethereum accounts!</strong>
+            Please check and make sure Metamask or your browser are pointed at the
+             correct network and your account is unlocked.
           </p>
         </Card>
       )

@@ -16,9 +16,9 @@ const drizzleOptions = {
       'SetVariable',
     ],
   },
-  polls: {
-    blocks: 0,
-  }
+  // polls: {
+  //   blocks: 0,
+  // }
 }
 
 export default drizzleOptions

@@ -14,6 +14,7 @@ class Home extends React.Component {
     super(props, context)
     this.handleFormOnSubmit = this.handleFormOnSubmit.bind(this)
     this.contracts = context.drizzle.contracts
+    this.versionDataKey = this.contracts.SimpleStorage.methods.version.cacheCall()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,10 +35,9 @@ class Home extends React.Component {
 
   render() {
     const drizzleInitialized = this.props.drizzleStatus.initialized
-    const versionDataKey = drizzleInitialized
-      && this.contracts.SimpleStorage.methods.version.cacheCall()
-    const version = versionDataKey
-      && _.get(this.props.SimpleStorage, `version.${versionDataKey}.value`)
+    const version = drizzleInitialized
+      && this.versionDataKey
+      && _.get(this.props.SimpleStorage, `version.${this.versionDataKey}.value`)
     return (
       <LoadingContainer>
         <div className='home-page'>
@@ -72,7 +72,6 @@ const mapStateToProps = (state) => {
     editItemTransaction,
     editItemError,
   } = state.home
-  console.log('state.contracts.SimpleStorage', state.contracts.SimpleStorage)
   return {
     formFieldValues,
     isEditItemLoading,
